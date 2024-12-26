@@ -41,13 +41,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <Nav />
       </SidebarContent>
-      <SidebarFooter className="flex items-center justify-between p-4 border-t">
-        <div className="flex justify-between w-full">
+      <SidebarFooter className="flex items-center justify-between border-t p-4">
+        <div className="flex w-full justify-between">
           <UserButton
             appearance={{
               baseTheme: theme === 'dark' ? dark : undefined,
             }}
-            showName 
+            showName
           />
           <ModeToggle />
         </div>
