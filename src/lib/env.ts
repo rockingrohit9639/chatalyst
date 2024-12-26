@@ -11,7 +11,6 @@ export const env = createEnv({
     CLERK_SECRET_KEY: z.string().min(1),
     CLERK_SIGNING_SECRET: z.string().min(1),
     SLACK_APP_ID: z.string().min(1),
-    SLACK_CLIENT_ID: z.string().min(1),
     SLACK_CLIENT_SECRET: z.string().min(1),
     SLACK_SIGNING_SECRET: z.string().min(1),
   },
@@ -22,6 +21,8 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    NEXT_PUBLIC_SLACK_CLIENT_ID: z.string().min(1),
+    NEXT_PUBLIC_SLACK_REDIRECT_URI: z.string().url(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -35,8 +36,9 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     CLERK_SIGNING_SECRET: process.env.CLERK_SIGNING_SECRET,
     SLACK_APP_ID: process.env.SLACK_APP_ID,
-    SLACK_CLIENT_ID: process.env.SLACK_CLIENT_ID,
+    NEXT_PUBLIC_SLACK_CLIENT_ID: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID,
     SLACK_CLIENT_SECRET: process.env.SLACK_CLIENT_SECRET,
     SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET,
+    NEXT_PUBLIC_SLACK_REDIRECT_URI: process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI,
   },
 })

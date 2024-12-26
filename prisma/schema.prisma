@@ -17,6 +17,8 @@ model User {
   clerkId   String  @unique
   imageUrl  String?
 
+  integrations UserIntegration[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,6 +32,25 @@ model Integration {
 
   name String
   type IntegrationType @unique
+
+  userIntegrations UserIntegration[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserIntegration {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  accessToken  String
+  refreshToken String?
+  metadata     Json?
+
+  integration   Integration @relation(fields: [integrationId], references: [id])
+  integrationId String      @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
