@@ -10,6 +10,10 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
     CLERK_SECRET_KEY: z.string().min(1),
     CLERK_SIGNING_SECRET: z.string().min(1),
+    SLACK_APP_ID: z.string().min(1),
+    SLACK_CLIENT_ID: z.string().min(1),
+    SLACK_CLIENT_SECRET: z.string().min(1),
+    SLACK_SIGNING_SECRET: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -30,5 +34,9 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     CLERK_SIGNING_SECRET: process.env.CLERK_SIGNING_SECRET,
+    SLACK_APP_ID: process.env.SLACK_APP_ID,
+    SLACK_CLIENT_ID: process.env.SLACK_CLIENT_ID,
+    SLACK_CLIENT_SECRET: process.env.SLACK_CLIENT_SECRET,
+    SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET,
   },
 })
