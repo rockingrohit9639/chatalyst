@@ -2,7 +2,7 @@
 
 import { ClerkProvider } from '@clerk/nextjs'
 import { SidebarProvider } from './ui/sidebar'
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from 'next-themes'
 import { useEffect, useState } from 'react'
 
 type ProvidersProps = {
@@ -10,25 +10,20 @@ type ProvidersProps = {
 }
 
 export default function Providers({ children }: ProvidersProps) {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
-    return null; 
+    return null
   }
 
   return (
     <ClerkProvider>
       <SidebarProvider>
-        <ThemeProvider 
-          attribute="class"
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </SidebarProvider>
