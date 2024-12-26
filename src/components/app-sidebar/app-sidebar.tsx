@@ -15,8 +15,13 @@ import {
 import Link from 'next/link'
 import { UserButton } from '@clerk/nextjs'
 import Nav from './nav'
+import { ModeToggle } from './mode-toggle'
+import { dark } from '@clerk/themes'
+import { useTheme } from 'next-themes'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { theme } = useTheme()
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -36,8 +41,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <Nav />
       </SidebarContent>
-      <SidebarFooter>
-        <UserButton showName />
+      <SidebarFooter className="flex items-center justify-between p-4 border-t">
+        <div className="flex justify-between w-full">
+          <UserButton
+            appearance={{
+              baseTheme: theme === 'dark' ? dark : undefined,
+            }}
+            showName 
+          />
+          <ModeToggle />
+        </div>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

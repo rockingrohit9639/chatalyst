@@ -2,6 +2,7 @@
 
 import { ClerkProvider } from '@clerk/nextjs'
 import { SidebarProvider } from './ui/sidebar'
+import { ThemeProvider } from "next-themes"
 
 type ProvidersProps = {
   children: React.ReactNode
@@ -10,7 +11,16 @@ type ProvidersProps = {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <ClerkProvider>
-      <SidebarProvider>{children}</SidebarProvider>
+      <SidebarProvider>
+        <ThemeProvider 
+          attribute="class"
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </SidebarProvider>
     </ClerkProvider>
   )
 }
