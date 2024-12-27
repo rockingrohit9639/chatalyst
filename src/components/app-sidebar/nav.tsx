@@ -1,6 +1,6 @@
 'use client'
 
-import { CableIcon, LayoutDashboardIcon, type LucideIcon } from 'lucide-react'
+import { CableIcon, HomeIcon, type LucideIcon } from 'lucide-react'
 import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '../ui/sidebar'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,9 +13,9 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   {
-    name: 'Dashboard',
+    name: 'Home',
     url: '/',
-    icon: LayoutDashboardIcon,
+    icon: HomeIcon,
   },
   {
     name: 'Integrations',
