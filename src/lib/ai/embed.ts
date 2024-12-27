@@ -14,7 +14,7 @@ export async function embedMessages(messages: EmbedMessage[]) {
   const index = pinecone.index(PINECONE_INDEX)
 
   for (const message of messages) {
-    const embeddings = await generateEmbedding(message)
+    const embeddings = await generateEmbedding(message.text)
     await index.upsert([
       {
         id: message.id,
@@ -25,11 +25,11 @@ export async function embedMessages(messages: EmbedMessage[]) {
   }
 }
 
-async function generateEmbedding(message: EmbedMessage) {
+export async function generateEmbedding(input: string) {
   try {
     const response = await openai.embeddings.create({
       model: 'text-embedding-ada-002',
-      input: message.text,
+      input,
     })
 
     return response.data[0].embedding
