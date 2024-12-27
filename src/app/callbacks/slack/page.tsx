@@ -1,5 +1,6 @@
 'use client'
 
+import { LoaderIcon } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
@@ -35,5 +36,10 @@ export default function SlackCallback() {
     sendCodeToCallback()
   }, [code, router])
 
-  return <div>This is slack callback</div>
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-2">
+      <LoaderIcon className="animate-spin" />
+      <p className="text-sm">Verification in progress. Please wait.</p>
+    </div>
+  )
 }
