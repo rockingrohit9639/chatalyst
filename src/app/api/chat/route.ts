@@ -2,6 +2,7 @@ import { openai } from '@ai-sdk/openai'
 import { streamText } from 'ai'
 import { generateEmbedding } from '~/lib/ai/embed'
 import { pinecone, PINECONE_INDEX } from '~/lib/ai/pinecone'
+import { decrypt } from '~/lib/encryption'
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
@@ -18,11 +19,11 @@ export async function POST(req: Request) {
     vector: embeddings,
     topK: 5,
     includeMetadata: true,
-    includeValues: true,
   })
+
   const relevantMessages = matches
     .filter((match) => match.score && match.metadata)
-    .map((match) => match?.metadata?.text as string)
+    .map((match) => decrypt(match?.metadata?.text as string))
 
   const SYSTEM_PROMPT = `
         You are a helpful assistant. Respond to the user's query based on the following messages from their database:

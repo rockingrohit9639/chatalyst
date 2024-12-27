@@ -1,3 +1,4 @@
+import { encrypt } from '../encryption'
 import { openai } from './openai'
 import { pinecone, PINECONE_INDEX } from './pinecone'
 
@@ -19,7 +20,10 @@ export async function embedMessages(messages: EmbedMessage[]) {
       {
         id: message.id,
         values: embeddings,
-        metadata: message, // @TODO : Remove text
+        metadata: {
+          id: message.id,
+          text: encrypt(message.text),
+        },
       },
     ])
   }
