@@ -46,6 +46,10 @@ export async function POST(request: Request) {
         user: { connect: { clerkId: userId } },
         accessToken: oauthResponse.access_token!,
         integration: { connect: { type: IntegrationType.SLACK } },
+        metadata: {
+          app_id: oauthResponse.app_id,
+          team_id: oauthResponse.team?.id,
+        },
       },
     })
 
