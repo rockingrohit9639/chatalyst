@@ -14,6 +14,8 @@ export const env = createEnv({
     SLACK_CLIENT_SECRET: z.string().min(1),
     SLACK_SIGNING_SECRET: z.string().min(1),
     SLACK_STATE_SECRET: z.string().min(1),
+    PINECONE_API_KEY: z.string().min(1),
+    OPENAI_API_KEY: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -42,5 +44,7 @@ export const env = createEnv({
     SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET,
     NEXT_PUBLIC_SLACK_REDIRECT_URI: process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI,
     SLACK_STATE_SECRET: process.env.SLACK_STATE_SECRET,
+    PINECONE_API_KEY: process.env.PINECONE_API_KEY,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
 })

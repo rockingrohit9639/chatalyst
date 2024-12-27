@@ -2,6 +2,7 @@ import { InstallProvider } from '@slack/oauth'
 import { env } from '../env'
 import { WebClient } from '@slack/web-api'
 import { UserIntegration } from '@prisma/client'
+import { EmbedMessage, embedMessages } from '../ai/embed'
 
 /** Used for initiating OAuth2 */
 export const slackInstaller = new InstallProvider({
@@ -30,7 +31,6 @@ export const slackClient = new WebClient()
  * Fetch messages from slack, create embeddings and save in database.
  */
 export async function syncSlackIntegration(userIntegration: UserIntegration) {
-  console.log(userIntegration)
   const userSlackClient = new WebClient(userIntegration.accessToken)
 
   /** Get all the conversations  */
@@ -45,7 +45,7 @@ export async function syncSlackIntegration(userIntegration: UserIntegration) {
     throw new Error('You have not added Chatalyst to any channels yet.')
   }
 
-  const allMessages: { id: string; text: string }[] = []
+  const allMessages: EmbedMessage[] = []
 
   for (const channel of joinedChannels) {
     const history = await userSlackClient.conversations.history({
@@ -68,5 +68,5 @@ export async function syncSlackIntegration(userIntegration: UserIntegration) {
     allMessages.push(...textMessages)
   }
 
-  console.log(allMessages)
+  await embedMessages(allMessages)
 }
