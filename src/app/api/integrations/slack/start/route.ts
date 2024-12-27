@@ -1,4 +1,5 @@
 import { auth } from '@clerk/nextjs/server'
+import { IntegrationType } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import { NextResponse } from 'next/server'
 import { prisma } from '~/lib/db'
@@ -14,7 +15,7 @@ export async function GET() {
     }
 
     const userSlackIntegration = await prisma.userIntegration.count({
-      where: { userId, integration: { type: 'SLACK' } },
+      where: { user: { clerkId: userId }, integration: { type: IntegrationType.SLACK } },
     })
     if (userSlackIntegration > 0) {
       return NextResponse.json({ success: false, message: 'Slack integrated is already completed.' }, { status: 400 })
@@ -24,7 +25,8 @@ export async function GET() {
       scopes: SLACK_SCOPES,
       redirectUri: env.NEXT_PUBLIC_SLACK_REDIRECT_URI,
     })
-  } catch {
+  } catch (error) {
+    console.log(error)
     return NextResponse.json({ success: false, message: 'Something went wrong' }, { status: 500 })
   }
 

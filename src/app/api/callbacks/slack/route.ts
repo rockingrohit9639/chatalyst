@@ -26,8 +26,8 @@ export async function POST(request: Request) {
 
     const userSlackIntegrations = await prisma.userIntegration.count({
       where: {
-        userId,
-        integration: { type: 'SLACK' },
+        user: { clerkId: userId },
+        integration: { type: IntegrationType.SLACK },
       },
     })
     if (userSlackIntegrations > 0) {
@@ -41,12 +41,11 @@ export async function POST(request: Request) {
       redirect_uri: env.NEXT_PUBLIC_SLACK_REDIRECT_URI,
     })
 
-    const slackIntegration = await prisma.integration.findFirstOrThrow({ where: { type: IntegrationType.SLACK } })
     await prisma.userIntegration.create({
       data: {
-        userId,
+        user: { connect: { clerkId: userId } },
         accessToken: oauthResponse.access_token!,
-        integrationId: slackIntegration.id,
+        integration: { connect: { type: IntegrationType.SLACK } },
       },
     })
 
