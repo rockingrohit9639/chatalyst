@@ -30,8 +30,10 @@ enum IntegrationType {
 model Integration {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  name String
-  type IntegrationType @unique
+  name        String
+  description String
+  color       String
+  type        IntegrationType @unique
 
   userIntegrations UserIntegration[]
 
@@ -45,6 +47,7 @@ model UserIntegration {
   accessToken  String
   refreshToken String?
   metadata     Json?
+  lastSyncedAt DateTime?
 
   integration   Integration @relation(fields: [integrationId], references: [id])
   integrationId String      @db.ObjectId

@@ -1,9 +1,17 @@
+import { Integration } from '@prisma/client'
 import dotenv from 'dotenv'
 dotenv.config()
 
 import { prisma } from '~/lib/db'
 
-const INTEGRATIONS = [{ name: 'Slack', type: 'SLACK' as const }]
+const INTEGRATIONS: Omit<Integration, 'createdAt' | 'updatedAt' | 'id'>[] = [
+  {
+    name: 'Slack',
+    type: 'SLACK',
+    description: 'Integrate Slack to sync your messages and perform AI-powered searches.',
+    color: '#E01E5A',
+  },
+]
 
 async function main() {
   console.log('🟦 Seeding Integrations... 🟦')
