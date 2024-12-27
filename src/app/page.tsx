@@ -1,15 +1,11 @@
 import { Button } from '~/components/ui/button'
-import { env } from '~/lib/env'
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div>
-      <Button>Home</Button>
-      <a
-        href={`https://slack.com/oauth/v2/authorize?client_id=${env.NEXT_PUBLIC_SLACK_CLIENT_ID}&scope=channels:history,groups:history,im:history,mpim:history&redirect_uri=${env.NEXT_PUBLIC_SLACK_REDIRECT_URI}`}
-      >
-        Connect to Slack
-      </a>
+    <div className="flex h-full items-center justify-center">
+      <form action="/api/integrations/slack/start">
+        <Button>Connect slack</Button>
+      </form>
     </div>
   )
 }
