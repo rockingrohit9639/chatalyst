@@ -19,7 +19,7 @@ import { ModeToggle } from './mode-toggle'
 import { dark } from '@clerk/themes'
 import { useTheme } from 'next-themes'
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { theme } = useTheme()
 
   return (
